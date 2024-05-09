@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Sedes</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+</head>
+<body>
+
+<nav th:replace="~{fragments/navbar.html :: navbar( active = 'Tecnicos')}"></nav>
+<br>
+<br>
+<main style="margin-right: 20px; margin-left: 20px">
+    <h2>Lista de Técnicos</h2>
+    <a class="btn btn-primary mt-4 mb-4" th:href="@{'/tecnicos/new'}">Nuevo Técnico</a>
+    <table class="table table-sm">
+        <tr>
+            <th style="text-align: center">#</th>
+            <th style="text-align: center">Nombres</th>
+            <th style="text-align: center">Apellidos</th>
+            <th style="text-align: center">DNI</th>
+            <th style="text-align: center">Celular</th>
+            <th style="text-align: center">Edad</th>
+            <th style="text-align: center">Accion</th>
+
+        </tr>
+        <tr th:each="tecnico, info : ${tecnicosList}">
+            <td style="text-align: center" th:text="${info.index + 1}"></td>
+            <td style="text-align: center" th:text="${tecnico.firstName}"></td>
+            <td style="text-align: center" th:text="${tecnico.lastname}"></td>
+            <td style="text-align: center" th:text="${tecnico.dni}"></td>
+            <td style="text-align: center" th:text="${tecnico.phone}"></td>
+            <td style="text-align: center" th:text="${tecnico.age}"></td>
+            <td style="text-align: center">
+                <a class="btn btn-secondary" th:href="@{'/tecnicos/edit' + '?id=' + ${tecnico.technicianID}}">
+                    Editar
+                </a>
+            </td>
+
+        </tr>
+    </table>
+</main>
+<br>
+<br>
+
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

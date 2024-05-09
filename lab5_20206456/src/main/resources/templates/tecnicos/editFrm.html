@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Tecnico</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+</head>
+<body>
+
+<div class="container">
+    <nav th:replace="~{fragments/navbar.html :: navbar( active = 'Tecnicos')}"></nav>
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <h2 th:text="${tecnico.technicianID==0? 'Nuevo Tecnico':'Editar Tecnico'}">Editar Tecnico</h2>
+            <hr/>
+            <div class="alert alert-danger" role="alert" th:if="${msg != null}" th:text="${msg}">
+                A simple success alert—check it out!
+            </div>
+            <form method="post" th:action="@{'/tecnicos/save'}" th:object="${tecnico}">
+                <input th:field="*{technicianID}" type="hidden"/>
+                <div class="mb-3">
+                    <label class="form-label">Nombre del Tecnico</label>
+                    <input th:field="*{firstName}" type="text" class="form-control"
+                           th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}"/>
+                    <div  class="invalid-feedback"
+                         th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                        Mensaje de error de firstName
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Apellido del Tecnico</label>
+                    <input th:field="*{lastname}" type="text" class="form-control"
+                           th:classappend="${#fields.hasErrors('lastname')?'is-invalid':''}"/>
+                    <div  class="invalid-feedback"
+                         th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">
+                        Mensaje de error de lastname
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">DNI del Tecnico</label>
+                    <input th:field="*{dni}" type="text" class="form-control"
+                           th:classappend="${#fields.hasErrors('dni')?'is-invalid':''}"/>
+                    <div  class="invalid-feedback"
+                         th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">
+                        Mensaje de error de lastname
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Celular del Tecnico</label>
+                    <input th:field="*{phone}" type="text" class="form-control"
+                           th:classappend="${#fields.hasErrors('phone')?'is-invalid':''}"/>
+                    <div  class="invalid-feedback"
+                          th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+                        Mensaje de error de phone
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Edad del Tecnico</label>
+                    <input th:field="*{age}" type="text" class="form-control"
+                           th:classappend="${#fields.hasErrors('age')?'is-invalid':''}"/>
+                    <div  class="invalid-feedback"
+                          th:if="${#fields.hasErrors('age')}" th:errors="*{age}">
+                        Mensaje de error de age
+                    </div>
+                </div>
+
+                <a th:href="@{'/tecnicos'}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary"
+                        th:text="${tecnico.technicianID==0? 'Guardar':'Actualizar'}">Actualizar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
